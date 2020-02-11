@@ -1,10 +1,10 @@
 
 const users = require('../../models')
 /**
- * Show
+ * Update
  * @class
  */
-class Show {
+class Update {
   constructor (app) {
     this.app = app
     this.run()
@@ -14,7 +14,7 @@ class Show {
    * middleware
    */
   middleware () {
-    this.app.get('/user/show/:id', (req, res) => {
+    this.app.put('/user/update/:id', (req, res) => {
       try {
         const {id} = req.params
         res.status(200).json(users.find(user => user.id === id) || {})
@@ -35,4 +35,4 @@ class Show {
   }
 }
 
-module.exports = Show
+module.exports = Update
