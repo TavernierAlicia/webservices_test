@@ -1,0 +1,10 @@
+{
+  "apps": [{
+    "name": "webservices_test",
+    "script": "./index.js",
+    "exec_mode": "cluster",
+    "instances": 1,
+    "watch": "../",
+    "log_date_format": "YYYY-MM-DD HH:mm Z"
+  }]
+}
