@@ -1,5 +1,6 @@
-
-const users = require('../../models')
+const users = require('../../models/')
+const check = require('./payload-validator/update.js')
+const validator = require('node-validator')
 /**
  * Update
  * @class
@@ -14,10 +15,16 @@ class Update {
    * middleware
    */
   middleware () {
-    this.app.put('/user/update/:id', (req, res) => {
+    this.app.put('/user/update/:id', validator.express(check), (req, res) => {
       try {
         const {id} = req.params
-        res.status(200).json(users.find(user => user.id === id) || {})
+        const body = req
+        const user = users.find(user => user.id === id) || false
+        if (!user) {
+          res.status(200).json({})
+          return
+        }
+        res.status(200).json(Object.assign({}, user, body))
       } catch (err) {
         res.status(500).json({
           'code': 500,
